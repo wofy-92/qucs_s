@@ -3807,6 +3807,11 @@ bool QucsApp::runSchematicChecks(QWidget *w, bool isPreSimulation)
     return false;
   }
 
+  if (sch->getSymbolMode()) {
+    // There is no symbol checks; skip
+    return false;
+  }
+
   // Get the backend simulator
   QString backend = simulatorsCombobox->currentText().toLower();
 
