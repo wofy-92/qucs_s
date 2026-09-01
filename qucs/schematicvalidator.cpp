@@ -15,6 +15,16 @@ QVector<ValidationIssue> SchematicValidator::validate() const {
   return runAllChecks(visitedFiles);
 }
 
+QVector<ValidationIssue> SchematicValidator::saveValidate() const {
+  QSet<QString> visitedFiles;
+  QVector<ValidationIssue> issues;
+
+  // Structural checks: run at top-level and recursively inside every subcircuit.
+  issues += checkStructuralIssues(visitedFiles);
+
+  return issues;
+}
+
 
 QVector<ValidationIssue> SchematicValidator::runAllChecks(QSet<QString> &visitedFiles) const {
   QVector<ValidationIssue> issues;

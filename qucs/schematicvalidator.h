@@ -42,6 +42,9 @@ public:
   /// e.g. qucsator-RF, ngspice, xyce
   QVector<ValidationIssue> validate() const;
 
+  /// @brief Validate schematic structure on save, excluding simulation checks.
+  QVector<ValidationIssue> saveValidate() const;
+
   /// @brief Set simulation backend
   /// @param SimulationBackend Name of the backend simulator
   /// @details Used by Qucs-S main app to set the simulation backend for the validation

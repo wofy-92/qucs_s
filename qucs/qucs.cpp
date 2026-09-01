@@ -3826,7 +3826,14 @@ bool QucsApp::runSchematicChecks(QWidget *w, bool isPreSimulation)
 
   a_validator.setSimulationBackend(backend);
   a_validator.setSchematic(sch);
-  QVector<ValidationIssue> issues = a_validator.validate();
+  QVector<ValidationIssue> issues;
+  if (isPreSimulation) {
+    // run every check
+    issues = a_validator.validate();
+  } else {
+    // run schematic checks only
+    issues = a_validator.saveValidate();
+  }
   if (issues.isEmpty())
     return false;
 
